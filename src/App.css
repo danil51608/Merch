@@ -36,3 +36,51 @@
     transform: rotate(360deg);
   }
 }
+
+.banner{
+  width: 100%;
+  margin-bottom: 20px;
+  height: 200px;
+  background: #fe3e61;
+}
+
+.maketWrapper{
+  width: 250px;
+  height: 300px;
+  background: #61dafb;
+  position: relative;
+}
+
+.maketWrapper:hover{
+ box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.maketWrapper > button{
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+  background: #fe3e61;
+  border: none;
+  color: white;
+  font-size: 20px;
+}
+
+.imgContainer{
+  width: 100%;
+  height: 100%;
+}
+
+.imgContainer > img{
+  width: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+.createWrapper{
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
