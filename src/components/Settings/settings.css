@@ -16,11 +16,13 @@ html, body {
     padding: 10px;
 }
 
-.settings > button{
+.settingsButton{
     width: 100%;
     height: 40px;
+    margin: 5px 0;
     background: #fe3e61;
     border: none;
     color: white;
     font-size: 15px;
+    cursor: pointer;
 }

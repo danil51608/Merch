@@ -28,8 +28,8 @@
     height: auto;
     overflow: hidden;
     /* height: 800px; */
-    /* position: relative; */
-    left: 350px;
+    position: relative;
+    /* left: 350px; */
     top: -50px;
     display: flex;
     /* justify-content: center;
@@ -70,7 +70,8 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 4px solid rgb(255, 218, 98);
+    border: 4px solid #202132;
+    margin: 2px 0;
 }
 
 #blueColor{
@@ -101,3 +102,12 @@
     border: 4px solid red;
 }
 
+#draggable{
+    border: 1px solid greenyellow;
+    width: 300px;
+    height: 500px;
+    position: absolute;
+    top: 200px;
+    left: 280px;
+
+}
