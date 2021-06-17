@@ -84,3 +84,13 @@
   width: 100%;
   height: 100%;
 }
+
+button{
+  background:#fe3e61;
+  cursor: pointer;
+  border: none;
+}
+
+button:hover{
+  background: #6d1d2c;
+}
