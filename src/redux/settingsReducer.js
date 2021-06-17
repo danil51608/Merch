@@ -1,9 +1,9 @@
-import {CHANGE_TEXT, CHANGE_FONT, ADD_TEXT, CHANGE_COLOR, ADD_IMG, CHANGE_IMG} from './types'
+import {CHANGE_TEXT, CHANGE_FONT_SIZE, SHOW_TEXT_SETTINGS, CHANGE_TEXT_COLOR, SHOW_IMAGE_SETTINGS, CHANGE_IMG} from './types'
 
 
 const initialState = {
     text: 'Text',
-    font: '14px',
+    fontSize: '42',
     showTextSettings: false,
     showImageSettings: false,
     textColor: '#000000',
@@ -15,13 +15,13 @@ export const settingsReducer = (state = initialState, action) => {
    switch (action.type) {
        case CHANGE_TEXT:
            return {...state, text: action.payload}
-       case CHANGE_FONT:
-           return {...state, font: action.payload}
-       case CHANGE_COLOR:
+       case CHANGE_FONT_SIZE:
+           return {...state, fontSize: action.payload}
+       case CHANGE_TEXT_COLOR:
            return {...state, textColor: action.payload}
-       case ADD_TEXT:
+       case SHOW_TEXT_SETTINGS:
            return {...state, showTextSettings: !state.showTextSettings} 
-       case ADD_IMG:
+       case SHOW_IMAGE_SETTINGS:
            return {...state, showImageSettings: !state.showImageSettings}   
        case CHANGE_IMG:
            return {...state, image: action.payload} 

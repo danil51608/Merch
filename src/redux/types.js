@@ -6,9 +6,9 @@ export const SWITCH_BLACK = 'SWITCH_BLACK';
 export const SWITCH_WHITE = 'SWITCH_WHITE';
 export const SWITCH_SIDE = 'SWITCH_SIDE';
 export const CHANGE_TEXT = 'CHANGE_TEXT';
-export const CHANGE_FONT = 'CHANGE_FONT';
-export const CHANGE_COLOR = 'CHANGE_COLOR';
-export const ADD_TEXT = 'ADD_TEXT';
-export const ADD_IMG = 'ADD_IMG';
+export const CHANGE_FONT_SIZE = 'CHANGE_FONT_SIZE';
+export const CHANGE_TEXT_COLOR = 'CHANGE_TEXT_COLOR';
+export const SHOW_TEXT_SETTINGS = 'SHOW_TEXT_SETTINGS';
+export const SHOW_IMAGE_SETTINGS = 'SHOW_IMAGE_SETTINGS';
 export const CHANGE_IMG = 'CHANGE_IMG';
 

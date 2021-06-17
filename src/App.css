@@ -37,6 +37,13 @@
   }
 }
 
+*{
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .banner{
   width: 100%;
   margin-bottom: 20px;
@@ -89,6 +96,8 @@ button{
   background:#fe3e61;
   cursor: pointer;
   border: none;
+  margin: 0;
+  padding: 0;
 }
 
 button:hover{

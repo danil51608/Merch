@@ -1,5 +1,5 @@
-import {SWITCH_BLUE, SWITCH_GREEN, SWITCH_PURPLE, SWITCH_BLACK, SWITCH_RED, SWITCH_WHITE, SWITCH_SIDE, CHANGE_TEXT, CHANGE_FONT,
-ADD_TEXT, CHANGE_COLOR, ADD_IMG, CHANGE_IMG} from './types'
+import {SWITCH_BLUE, SWITCH_GREEN, SWITCH_PURPLE, SWITCH_BLACK, SWITCH_RED, SWITCH_WHITE, SWITCH_SIDE, CHANGE_TEXT, CHANGE_FONT_SIZE,
+    SHOW_TEXT_SETTINGS, CHANGE_TEXT_COLOR, SHOW_IMAGE_SETTINGS, CHANGE_IMG} from './types'
 
 
 export const switchToBlue = () => {
@@ -51,29 +51,29 @@ export const changeText = (text) =>{
     }
 }
 
-export const changeFont = (size) =>{
+export const changeFontSize = (size) =>{
     return {
-        type: CHANGE_FONT,
+        type: CHANGE_FONT_SIZE,
         payload: size
     }
 }
 
-export const changeColor = (color) =>{
+export const changeTextColor = (color) =>{
     return {
-        type: CHANGE_COLOR,
+        type: CHANGE_TEXT_COLOR,
         payload: color
     }
 }
 
-export const addText = () =>{
+export const toggleTextSettings = () =>{
     return {
-        type: ADD_TEXT
+        type: SHOW_TEXT_SETTINGS
     }
 }
 
-export const addImage = () =>{
+export const toggleImageSettings = () =>{
     return {
-        type: ADD_IMG
+        type: SHOW_IMAGE_SETTINGS
     }
 }
 

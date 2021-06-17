@@ -5,29 +5,39 @@ import tShirtBack from '../../imgs/t-shirtBack.png'
 import whiteShirtFront from '../../imgs/t-shirtWFront.png'
 import whiteShirtBack from '../../imgs/t-shirtWBack.png'
 import {connect} from 'react-redux'
-import {switchToBlue, switchToPurple, switchToGreen, switchToBlack, switchToRed, switchToWhite, switchSide, addText, addImage} from '../../redux/actions'
+import {switchToBlue, switchToPurple, switchToGreen, switchToBlack, switchToRed, switchToWhite, switchSide, toggleTextSettings, toggleImageSettings} from '../../redux/actions'
 
 function DesignArea(props){
 
     // redux states and actions
     const {switchToBlue, switchToPurple, switchToGreen, switchToBlack, switchToRed,
-           switchToWhite, switchSide, color, side, text, font, textColor, addText, showTextSettings,
-           showImageSettings, image, addImage
+           switchToWhite, switchSide, color, side, text, fontSize, textColor, toggleTextSettings, showTextSettings,
+           showImageSettings, image, toggleImageSettings
            } = props
 
+    
+    function handleColorClick(e, switchColor){
+        const colorElements = Array.from(document.getElementsByClassName('colorElement'))
+        colorElements.map(colorElement=>{
+            colorElement.style.border = '0px solid black';
+        })
+        e.target.style.border = '4px solid black'
+        switchColor()
+    }
+    
     // делает элементы перетаскиваемыми
     useEffect(() => setDraggableElements(), [showTextSettings, showImageSettings])
 
     // создает div с текстом пользователя
     function createText() {
-        addText() // закрывает настройки текста
-        const params = {font, textColor} // get text parameters
-        createTextElement(params)
+        toggleTextSettings() // закрывает настройки текста
+        const params = {fontSize, textColor} // получение и передача настроек текста
+        createUserElement(params) // создает статичный элемент 
     }
 
     function createImage() {
-        addImage() // close text settings 
-        createImageElement(image)
+        toggleImageSettings() // закрывает настройки картинки
+        createUserElement(image, 'img') // создает статичный элемент 
     }
 
     return (
@@ -44,14 +54,12 @@ function DesignArea(props){
 
                 }
                 
-                {/* if showTextSettings is shown => show draggable and customizable text element  */}
                 {
                     showTextSettings ? 
                     
                     <div id='dragWrapper' className='draggable'> 
-                        <div id='dragWrapperheader' className='dragHeader'></div>
-                        <button id='createText' onClick={()=>createText()}>&#10003;</button>
-                        <textarea id='textSign' value={text} style={{fontSize: font+'px', color: textColor}} onChange={()=> null}></textarea>
+                        <button onClick={()=>createText()}>&#10003;</button>
+                        <textarea id='dragWrapperheader' className='dragger' value={text} style={{fontSize: fontSize+'px', color: textColor}} onChange={()=> null}></textarea>
                     </div> 
 
                     : null
@@ -60,9 +68,8 @@ function DesignArea(props){
                     showImageSettings ?
 
                     <div id='dragWrapperImg' className='draggable'> 
-                        <div id='dragWrapperImgheader' className='dragHeader'></div>
-                        <button id='createText' onClick={()=>createImage()}>&#10003;</button>
-                        <img id='userImage' src={image} alt=''/>
+                        <button onClick={()=>createImage()}>&#10003;</button>
+                        <img id='dragWrapperImgheader' className='dragger' src={image} alt=''/>
                     </div> 
 
                     : null
@@ -72,25 +79,25 @@ function DesignArea(props){
             </div>
 
             <ul className='colorList'>
-                <li id='blueColor' onClick={switchToBlue}></li>
-                <li id='purpleColor' onClick={switchToPurple}></li>
-                <li id='greenColor' onClick={switchToGreen}></li>
-                <li id='blackColor' onClick={switchToBlack}></li>
-                <li id='redColor' onClick={switchToRed}></li>
-                <li id='whiteColor' onClick={switchToWhite}></li>
+                <li id='blueColor' className='colorElement' onClick={(e)=>handleColorClick(e, switchToBlue) }></li>
+                <li id='purpleColor' className='colorElement' onClick={(e)=>handleColorClick(e, switchToPurple)}></li>
+                <li id='greenColor' className='colorElement' onClick={(e)=>handleColorClick(e, switchToGreen)}></li>
+                <li id='blackColor' className='colorElement' onClick={(e)=>handleColorClick(e, switchToBlack)}></li>
+                <li id='redColor' className='colorElement' onClick={(e)=>handleColorClick(e, switchToRed)}></li>
+                <li id='whiteColor' className='colorElement' onClick={(e)=>handleColorClick(e, switchToWhite)}></li>
             </ul>
         </div>
     )
 }
 
 
-//get state's objects
+// получение state'ов и передача их в компонент
 const mapStateToProps = (state) => {
     return {
         color: state.constructorReducer.color,
         side: state.constructorReducer.side,
         text: state.settingsReducer.text,
-        font: state.settingsReducer.font,
+        fontSize: state.settingsReducer.fontSize,
         showTextSettings: state.settingsReducer.showTextSettings,
         textColor: state.settingsReducer.textColor,
         showImageSettings: state.settingsReducer.showImageSettings,
@@ -99,7 +106,7 @@ const mapStateToProps = (state) => {
 }
 
 
-//get all actions
+// получение actions и передача их в компонент
 const mapDispatchToProps = {
     switchToBlue,
     switchToPurple,
@@ -108,11 +115,56 @@ const mapDispatchToProps = {
     switchToRed,
     switchToWhite,
     switchSide,
-    addText,
-    addImage
+    toggleTextSettings,
+    toggleImageSettings
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DesignArea)
+
+
+
+function createUserElement(params, type='text'){
+    // получение wrapper и его стилей для определения позиции элемента 
+    const wrapper =  document.getElementById(type === 'text' ? 'dragWrapper' : 'dragWrapperImg')
+    const wrapperStyles = window.getComputedStyle(wrapper)
+    const top = wrapperStyles.getPropertyValue('top')
+    const left = wrapperStyles.getPropertyValue('left')
+    const width = wrapperStyles.getPropertyValue('width')
+    const height = wrapperStyles.getPropertyValue('height')
+
+    // создание элемента
+    const newElement = document.createElement('div')
+    newElement.className = 'insertedElement'
+    // размещение элемента
+    newElement.style.top = top
+    newElement.style.left = left
+
+    // при создании элемента текста
+    if(type === 'text'){
+        // получение поля ввода текста
+        const input = document.getElementById('dragWrapperheader')
+        newElement.innerText = input.value
+        // задание пользовательских настроек текста
+        newElement.style.color = params.textColor
+        newElement.style.fontSize = params.fontSize + 'px'
+    }
+
+    // при создании элемента картинки
+    else{
+        // создание картинки
+        const imageEl = document.createElement('img')
+        imageEl.src = params
+        // присвоение заданных размеров элементу
+        newElement.style.width = width
+        newElement.style.height = height
+        // вставка картинки в элемент
+        newElement.appendChild(imageEl)
+    }
+
+    // получение контейнера футболки и вставка в него элемента
+    const tShirt = document.getElementsByClassName('t-shirtWrapper')[0]
+    tShirt.appendChild(newElement)
+}
 
 function setDraggableElements(){
     const ElList = document.querySelectorAll('.draggable')
@@ -158,52 +210,4 @@ function dragElement(elmnt) {
     document.onmouseup = null;
     document.onmousemove = null;
   }
-}
-
-function createTextElement(params){
-    //wrapper is used to define the needed position
-    const wrapper = document.getElementById('dragWrapper')
-    const styles = window.getComputedStyle(wrapper)
-    const top = styles.getPropertyValue('top')
-    const left = styles.getPropertyValue('left')
-
-    const input = document.getElementById('textSign') //get input 
-
-    //creates a div with user text and apply needed parameters
-    const newElement = document.createElement('div')
-    newElement.innerText = input.value
-    newElement.style.color = params.textColor
-    newElement.className = 'insertedElement'
-    newElement.style.top = top
-    newElement.style.left = left
-    newElement.style.fontSize = params.font + 'px'
-
-    //get parentElement for inserting and insert
-    const parentElement = document.getElementsByClassName('t-shirtWrapper')[0]
-    parentElement.appendChild(newElement)
-}
-
-function createImageElement(image){
-    //wrapper is used to define the needed position
-    const wrapper = document.getElementById('dragWrapperImg')
-    const styles = window.getComputedStyle(wrapper)
-    const top = styles.getPropertyValue('top')
-    const left = styles.getPropertyValue('left')
-    const width = styles.getPropertyValue('width')
-    const height = styles.getPropertyValue('height')
-
-    //creates a div with user text and apply needed parameters
-    const imageEl = document.createElement('img')
-    const imageWrapper = document.createElement('div')
-    imageWrapper.classList = 'image-wrapper'
-    imageWrapper.style.width = width
-    imageWrapper.style.height = height
-    imageEl.src = image
-    imageEl.className ='insertedImage'
-    imageWrapper.style.top = top
-    imageWrapper.style.left = left
-    imageWrapper.appendChild(imageEl)
-    //get parentElement for inserting and insert
-    const parentElement = document.getElementsByClassName('t-shirtWrapper')[0]
-    parentElement.appendChild(imageWrapper)
 }
