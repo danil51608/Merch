@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react'
+import { Link } from "react-router-dom";
 import './DesignArea.css'
 import tShirtFront from '../../imgs/t-shirtFront.png'
 import tShirtBack from '../../imgs/t-shirtBack.png'
@@ -19,9 +20,9 @@ function DesignArea(props){
     function handleColorClick(e, switchColor){
         const colorElements = Array.from(document.getElementsByClassName('colorElement'))
         colorElements.map(colorElement=>{
-            colorElement.style.border = '0px solid black';
+            colorElement.style.border = '1px solid black';
         })
-        e.target.style.border = '4px solid black'
+        e.target.style.border = '3px solid black'
         switchColor()
     }
     
@@ -86,6 +87,19 @@ function DesignArea(props){
                 <li id='redColor' className='colorElement' onClick={(e)=>handleColorClick(e, switchToRed)}></li>
                 <li id='whiteColor' className='colorElement' onClick={(e)=>handleColorClick(e, switchToWhite)}></li>
             </ul>
+
+            <div className="instructions">
+                <h2>Instructions:</h2>
+                <span>1. Right Click To Delete Element</span><br/><br/>
+                <span>2. Click On Color Circle To Change The T-Shirt Color</span><br/><br/>
+                <span>3. Click Front/Back To Change The T-Shirt Side</span><br/><br/>
+                <Link exact to="/">
+                    <button className="settingsButton">Go To StartPage</button>
+                </Link>
+                
+            </div>
+           
+
         </div>
     )
 }
@@ -138,6 +152,13 @@ function createUserElement(params, type='text'){
     // размещение элемента
     newElement.style.top = top
     newElement.style.left = left
+    newElement.oncontextmenu = (e) => { 
+        e.preventDefault();
+        e.target.remove()
+    }
+    // присвоение заданных размеров элементу
+    newElement.style.width = width
+    newElement.style.height = height
 
     // при создании элемента текста
     if(type === 'text'){
@@ -154,9 +175,6 @@ function createUserElement(params, type='text'){
         // создание картинки
         const imageEl = document.createElement('img')
         imageEl.src = params
-        // присвоение заданных размеров элементу
-        newElement.style.width = width
-        newElement.style.height = height
         // вставка картинки в элемент
         newElement.appendChild(imageEl)
     }
