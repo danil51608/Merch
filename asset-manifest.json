@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Merch/static/css/main.d6433405.chunk.css",
-    "main.js": "/Merch/static/js/main.cf6049f8.chunk.js",
-    "main.js.map": "/Merch/static/js/main.cf6049f8.chunk.js.map",
+    "main.js": "/Merch/static/js/main.76424c8c.chunk.js",
+    "main.js.map": "/Merch/static/js/main.76424c8c.chunk.js.map",
     "runtime-main.js": "/Merch/static/js/runtime-main.20a0292c.js",
     "runtime-main.js.map": "/Merch/static/js/runtime-main.20a0292c.js.map",
     "static/js/2.0d432d3c.chunk.js": "/Merch/static/js/2.0d432d3c.chunk.js",
@@ -21,6 +21,6 @@
     "static/js/runtime-main.20a0292c.js",
     "static/js/2.0d432d3c.chunk.js",
     "static/css/main.d6433405.chunk.css",
-    "static/js/main.cf6049f8.chunk.js"
+    "static/js/main.76424c8c.chunk.js"
   ]
 }
