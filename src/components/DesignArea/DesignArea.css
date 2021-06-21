@@ -139,7 +139,6 @@
 .insertedElement{
     position: absolute;
     overflow: hidden;
-    /* z-index: -15; */
 }
 
 .draggable > button{
