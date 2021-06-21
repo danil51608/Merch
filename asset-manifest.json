@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/Merch/static/css/main.d6433405.chunk.css",
+    "main.js": "/Merch/static/js/main.cf6049f8.chunk.js",
+    "main.js.map": "/Merch/static/js/main.cf6049f8.chunk.js.map",
+    "runtime-main.js": "/Merch/static/js/runtime-main.20a0292c.js",
+    "runtime-main.js.map": "/Merch/static/js/runtime-main.20a0292c.js.map",
+    "static/js/2.0d432d3c.chunk.js": "/Merch/static/js/2.0d432d3c.chunk.js",
+    "static/js/2.0d432d3c.chunk.js.map": "/Merch/static/js/2.0d432d3c.chunk.js.map",
+    "static/js/3.6cedfd7d.chunk.js": "/Merch/static/js/3.6cedfd7d.chunk.js",
+    "static/js/3.6cedfd7d.chunk.js.map": "/Merch/static/js/3.6cedfd7d.chunk.js.map",
+    "index.html": "/Merch/index.html",
+    "static/css/main.d6433405.chunk.css.map": "/Merch/static/css/main.d6433405.chunk.css.map",
+    "static/js/2.0d432d3c.chunk.js.LICENSE.txt": "/Merch/static/js/2.0d432d3c.chunk.js.LICENSE.txt",
+    "static/media/t-shirtBack.8872783e.png": "/Merch/static/media/t-shirtBack.8872783e.png",
+    "static/media/t-shirtFront.af472413.png": "/Merch/static/media/t-shirtFront.af472413.png",
+    "static/media/t-shirtWBack.977911a7.png": "/Merch/static/media/t-shirtWBack.977911a7.png",
+    "static/media/t-shirtWFront.b79cf929.png": "/Merch/static/media/t-shirtWFront.b79cf929.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.20a0292c.js",
+    "static/js/2.0d432d3c.chunk.js",
+    "static/css/main.d6433405.chunk.css",
+    "static/js/main.cf6049f8.chunk.js"
+  ]
+}
