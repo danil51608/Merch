@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useRef} from 'react'
 import { Link } from "react-router-dom";
 import './DesignArea.css'
 import tShirtFront from '../../imgs/t-shirtFront.png'
@@ -7,8 +7,12 @@ import whiteShirtFront from '../../imgs/t-shirtWFront.png'
 import whiteShirtBack from '../../imgs/t-shirtWBack.png'
 import {connect} from 'react-redux'
 import {switchToBlue, switchToPurple, switchToGreen, switchToBlack, switchToRed, switchToWhite, switchSide, toggleTextSettings, toggleImageSettings} from '../../redux/actions'
+import html2canvas from 'html2canvas';
+import { jsPDF } from 'jspdf';
+ 
 
 function DesignArea(props){
+    const maketRef = useRef()
 
     // redux states and actions
     const {switchToBlue, switchToPurple, switchToGreen, switchToBlack, switchToRed,
@@ -24,6 +28,20 @@ function DesignArea(props){
         })
         e.target.style.border = '3px solid black'
         switchColor()
+    }
+
+
+    async function downloadPDF(){
+        const element = maketRef.current
+        const canvas = await html2canvas(element)
+        const data = canvas.toDataURL('image/png')
+
+        const pdf = new jsPDF()
+        const imgProp = pdf.getImageProperties(data)
+        const pdfWidth = pdf.internal.pageSize.getWidth()
+        const pdfHeight = (imgProp.height * pdfWidth) / imgProp.width
+        pdf.addImage(data, 'PNG', 0, 0, pdfWidth, pdfHeight)
+        pdf.save('print.pdf')
     }
     
     // делает элементы перетаскиваемыми
@@ -46,7 +64,7 @@ function DesignArea(props){
             <div className="sideButtonsWrapper">
                 <button className="sideButton" onClick={switchSide}>Front/Back</button>
             </div>
-            <div className="t-shirtWrapper">
+            <div className="t-shirtWrapper" ref={maketRef}>
                 {
                     color === 'white' && side ? <img src={whiteShirtFront} alt=''/> : 
                     color === 'white' && !side ? <img src={whiteShirtBack} alt=''/> : 
@@ -96,9 +114,9 @@ function DesignArea(props){
                 <Link exact to="/">
                     <button className="settingsButton">Go To StartPage</button>
                 </Link>
-                
+
             </div>
-           
+            <button onClick={downloadPDF}>Download PDF</button>
 
         </div>
     )
